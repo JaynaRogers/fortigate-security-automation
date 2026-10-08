@@ -1,0 +1,4 @@
+[
+  {"id": 10, "name": "App HTTPS", "source": ["192.0.2.0/24"], "destination": ["198.51.100.10/32"], "service": ["HTTPS"], "action": "accept", "logging": true, "enabled": true},
+  {"id": 20, "name": "Default deny", "source": ["0.0.0.0/0"], "destination": ["0.0.0.0/0"], "service": ["ALL"], "action": "deny", "logging": true, "enabled": true}
+]
