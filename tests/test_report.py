@@ -20,7 +20,7 @@ class ReportTests(unittest.TestCase):
         self.assertTrue(all(item["remediation"] for item in report["findings"]))
 
     def test_report_escapes_dynamic_text(self):
-        observed = [{**self.baseline[0], "id": 9, "name": "<script>alert(1)</script>",
+        observed = [{**self.baseline[0], "id": 1, "name": "<script>alert(1)</script>",
                      "source": ["0.0.0.0/0"], "destination": ["0.0.0.0/0"]}]
         html = render_html(assess(self.baseline, observed))
         self.assertNotIn("<script>alert(1)</script>", html)
