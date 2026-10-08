@@ -66,3 +66,13 @@ The API adapter has mocked tests and does not require device access in CI.
 `src/object_resolution.py` expands nested firewall address groups and service groups using supplied FortiOS-style object dictionaries. Supported addresses are IPv4/IPv6 `ipmask` objects; unsupported address types (including FQDN and IP ranges), unknown objects, empty groups, duplicate names, and recursive groups raise explicit errors rather than silently producing incomplete findings.
 
 `normalize_fortios_policy(...)` converts a policy and its supplied object collections to the simplified model used by `src.audit.audit_policies`. Only the literal `ALL` service is treated as all services; named custom services are not assumed to represent their port/protocol definitions. This is **offline resolution only**: the read-only live API adapter currently retrieves policies but does not fetch address/service object inventories or perform automatic live policy assessment. NAT, zones, policy ordering, schedules, IPv6 policy tables, and complex FortiOS address types remain out of scope.
+
+## Offline HTML security assessment
+
+Generate a self-contained, local HTML report using synthetic fixtures. **No firewall access or credentials are required.**
+
+```bash
+python -m src.report
+```
+
+Open `output/security-assessment.html` in your browser. The report includes severity counts, policy risk findings, remediation recommendations, and a configuration drift section. Output is excluded from version control. Findings use a simplified policy model and are not a substitute for a complete FortiOS security review.
