@@ -45,3 +45,18 @@ This repository uses fictional policy data and RFC 5737 documentation IP ranges.
 ## License
 
 MIT.
+
+## Read-only FortiOS REST API integration
+
+The optional adapter retrieves raw FortiOS policy objects via `GET /api/v2/cmdb/firewall/policy` and writes a local JSON summary. It does not send write requests or automatically convert address and service objects into CIDRs.
+
+```bash
+python -m pip install -r requirements.txt
+export FORTIOS_URL="https://fortigate.example.test"
+export FORTIOS_TOKEN="your-read-only-api-token"
+python -m src.fortios_api --vdom root
+```
+
+The default output is `output/fortios-policies.json`, excluded by `.gitignore`. Treat exported policies as sensitive. Use a least-privilege REST API administrator with read-only firewall policy access and a valid TLS certificate; certificate verification is enforced. The offline policy auditor operates on a separate simplified schema; raw FortiOS address/service object names are **not** treated as fully resolved risk findings.
+
+The API adapter has mocked tests and does not require device access in CI.
